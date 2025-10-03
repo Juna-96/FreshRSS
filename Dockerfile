@@ -29,5 +29,6 @@ RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf \
 # 暴露默认端口（Zeabur 会映射 $PORT）
 EXPOSE 8080
 
-# 启动 Apache（监听 $PORT）
-CMD ["sh", "-c", "apache2-foreground"]
+# 替换 Apache 的监听端口为 Zeabur 提供的 $PORT
+CMD ["sh", "-c", "sed -i 's/80/${PORT}/' /etc/apache2/ports.conf /etc/apache2/sites-available/000-default.conf && apache2-foreground"]
+
