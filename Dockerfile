@@ -11,3 +11,8 @@ WORKDIR /var/www/html
 
 # FreshRSS 的入口在 p 目录
 CMD ["php", "-S", "0.0.0.0:8080", "-t", "./p"]
+
+# 设置 data 目录可写
+RUN mkdir -p /var/www/html/data \
+    && chown -R www-data:www-data /var/www/html/data \
+    && chmod -R 755 /var/www/html/data
